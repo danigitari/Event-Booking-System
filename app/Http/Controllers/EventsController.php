@@ -40,12 +40,12 @@ class EventsController extends Controller
         if ($event->tickets()->count() >= $event->max_attendees) {
             return response()->json([
                 'message' => 'Event is full',
-            ], 403);
+            ], 200);
         }
         if (Ticket::where('user_id',auth()->user()->id)->where('event_id', $request->event_id)->count() > 5) {
             return response()->json([
                 'message' => 'You have already purchased 5 tickets for this event',
-            ], 403);
+            ], 200);
         } else {
             $event->tickets()->create([
                 'ticketType' => $request->ticketType,

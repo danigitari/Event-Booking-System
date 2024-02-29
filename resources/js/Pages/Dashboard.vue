@@ -119,9 +119,9 @@
     <v-snackbar v-model="showAlert" 
             color="success" :timeout="2000">
         <template v-slot:actions>
-            <v-btn color="blue" variant="text" @click="snackbar = false">
-                Close
-            </v-btn>
+
+            <span class="p-5">{{ message }}</span>
+
         </template>
     </v-snackbar>
 </template>
@@ -182,7 +182,7 @@ export default defineComponent({
                     getEvents();
                 })
                 .catch((error) => {
-                    error.value = error.message;
+                    error.value = error.response.data.message;
                     console.log(error);
                 });
 
@@ -218,6 +218,7 @@ export default defineComponent({
             phone,
             ticketType,
             error,
+            message,
 
         };
     },
