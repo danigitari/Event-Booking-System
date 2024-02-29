@@ -12,7 +12,7 @@ class EventsController extends Controller
     {
         return response()->json([
             'message' => 'Events fetched successfully',
-            'events' => Event::all(),
+            'events' => Event::all()->toArray(),
         ]);
     }
 

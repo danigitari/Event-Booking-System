@@ -22,23 +22,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+Route::get('/users', [\App\Http\Controllers\AdminController::class, 'getUsers']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/getEvents', [\App\Http\Controllers\EventsController::class, 'getEvents']);
     Route::group(['middleware' => ['role:admin']], function () {
         Route::post('/addNewAdmin', [\App\Http\Controllers\AdminController::class, 'addNewAdmin']);
-        Route::post('/addNewEvent', [\App\Http\Controllers\AdminController::class, 'addNewEvent']);
+        Route::post('/addEvent', [\App\Http\Controllers\AdminController::class, 'createEvent']);
         Route::match(['PATCH', 'PUT'], '/editEvent/{id}', [\App\Http\Controllers\AdminController::class, 'editEvent']);
-        Route::delete('/deleteEvent/{id}', [\App\Http\Controllers\AdminController::class, 'deleteEvent']);
-        Route::post('/defineTicketPrice', [\App\Http\Controllers\AdminController::class, 'defineTicketPrice']);
-        Route::post('/createTickets', [\App\Http\Controllers\AdminController::class, 'createTickets']);
+        Route::post('/deleteEvent', [\App\Http\Controllers\AdminController::class, 'deleteEvent']);
+        Route::get('/getEvent/{id}', [\App\Http\Controllers\EventsController::class, 'getEvent']);
+        Route::get('/getUsers', [\App\Http\Controllers\AdminController::class, 'getUsers']);
+        Route::post('/editEvent', [\App\Http\Controllers\AdminController::class, 'editEvent']);
+        // Route::post('/defineTicketPrice', [\App\Http\Controllers\AdminController::class, 'defineTicketPrice']);
+        // Route::post('/createTickets', [\App\Http\Controllers\AdminController::class, 'createTickets']);
 
     });
 
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('/editProfile', [\App\Http\Controllers\AuthController::class, 'editProfile']);
     Route::get('/getCurrentUser', [\App\Http\Controllers\AuthController::class, 'getCurrentUser']);
-    Route::get('/getEvents', [\App\Http\Controllers\EventsController::class, 'getEvents']);
-    Route::get('/getEvent/{id}', [\App\Http\Controllers\EventsController::class, 'getEvent']);
+
     Route::post('/buyTicket', [\App\Http\Controllers\TicketsController::class, 'buyTicket']);
 
 

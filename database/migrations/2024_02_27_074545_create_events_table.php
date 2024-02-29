@@ -16,10 +16,11 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->text('description');
-            $table->dateTime('date');
+            $table->date('date');
             $table->integer('max_attendees');
             $table->string('location');
-            $table->integer('price');
+            $table->integer('vip_price');
+            $table->integer('regular_price');
         });
     }
 

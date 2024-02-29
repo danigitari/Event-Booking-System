@@ -64,6 +64,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import { reactive, ref } from "vue";
 import { login } from "../api/services.js";
@@ -94,11 +95,11 @@ export default {
             if (res.status === 200) {
                 if (res.data.role[0] === "admin") {
                     localStorage.setItem("token", res.data.token);
-                    router.push("/dashboard");
+                    router.push("/admin-dashboard");
                 }
                 else {
                     localStorage.setItem("token", res.data.token);
-                    router.push("/user-dashboard");
+                    router.push("/dashboard");
                 }
             }
 

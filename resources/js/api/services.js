@@ -21,6 +21,26 @@ export async function login(loginCredentials) {
         return error;
     }
 }
+export async function register(loginCredentials) {
+    try {
+        const res = await axios.post(
+            "/api/register",
+            loginCredentials,
+            {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+            }
+        );
+        console.log(res);
+        return res;
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}
 
 export async function getUsers() { 
     try {
@@ -32,19 +52,11 @@ export async function getUsers() {
         return error;
     }
 }
-export async function getLogs() { 
+
+export async function logout() 
+{
     try {
-        const res = await api.get('/getLogs');
-        return res.data.users;
-    }
-    catch(error) {
-        console.error(error);
-        return error;
-    }
-}
-export async function getRoles() { 
-    try {
-        const res = await api.get('/getRoles');
+        const res = await api.post('/logout');
         return res.data;
     }
     catch(error) {
@@ -52,9 +64,21 @@ export async function getRoles() {
         return error;
     }
 }
-export async function getCredentials() { 
+export async function getEvents() 
+{
     try {
-        const res = await api.get('/getCredentials');
+        const res = await api.post('/getEvents');
+        return res.data;
+    }
+    catch(error) {
+        console.error(error);
+        return error;
+    }
+}
+export async function getEvent(id) 
+{
+    try {
+        const res = await api.post('/getEvent/'+id);
         return res.data;
     }
     catch(error) {

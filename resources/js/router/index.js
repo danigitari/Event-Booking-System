@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../Pages/Login.vue";
 import AdminLogin from "../Pages/Admin/Login.vue";
 import Register from "../Pages/Register.vue";
-// import Dashboard from "../../components/admin/Dashboard.vue";
+import Dashboard from "../Pages/Dashboard.vue"
+import AdminDashboard from "../Pages/Admin/AdminDashboard.vue";
 // import Sidebar from "../../components/Sidebar.vue";
 // import Credentials from "../../components/admin/Credentials.vue";
 // import Departments from "../../components/admin/Departments.vue";
@@ -26,6 +27,16 @@ const routes = [
         name: "register",
         component: Register,
     },
+    {
+        path:"/dashboard",
+        name:"dashboard",
+        component: Dashboard
+    },
+    {
+        path:"/admin-dashboard",
+        name:"admin-dashboard",
+        component: AdminDashboard
+    }
 
     
 

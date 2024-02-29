@@ -10,18 +10,18 @@
         <div class="w-full max-w-sm">
             <form
                 class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-                @submit.prevent="handleLogin"
+                @submit.prevent="handleRegister"
             >
-            <div class="mb-4">
+                <div class="mb-4">
                     <label
                         class="block text-gray-700 text-sm font-bold mb-2"
-                        for="username"
+                        for="name"
                     >
                         Name
                     </label>
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="username"
+                        id="name"
                         type="text"
                         placeholder="Username"
                         v-model="formData.name"
@@ -78,21 +78,22 @@
 </template>
 <script>
 import { reactive, ref } from "vue";
-import { login } from "../api/services.js";
+import { register } from "../api/services.js";
 
 import { useRouter } from "vue-router";
 export default {
-    name: "Login",
+    name: "Register",
 
     setup() {
         const router = useRouter();
         const formData = reactive({
+            name: "",
             email: "",
             password: "",
         });
         const error = ref(false);
-        const handleLogin = async () => {
-            const res = await login(formData);
+        const handleRegister = async () => {
+            const res = await register(formData);
             console.log();
             if (res.response) {
                 if (res.response.status === 401) {
@@ -107,17 +108,17 @@ export default {
             if (res.status === 200) {
                 if (res.data.role[0] === "admin") {
                     localStorage.setItem("token", res.data.token);
-                    router.push("/dashboard");
+                    router.push("/admin-dashboard");
                 } else {
                     localStorage.setItem("token", res.data.token);
-                    router.push("/user-dashboard");
+                    router.push("/dashboard");
                 }
             }
         };
 
         return {
             formData,
-            handleLogin,
+            handleRegister,
             error,
         };
     },
