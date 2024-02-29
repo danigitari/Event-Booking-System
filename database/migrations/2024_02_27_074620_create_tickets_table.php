@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->integer('vip_price');
-            $table->integer('regular_price');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('ticketType');
             $table->foreignId('event_id')->constrained();
+            $table->foreignId('user_id')->constrained();
         });
     }
 

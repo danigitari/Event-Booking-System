@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/getUsers', [\App\Http\Controllers\AdminController::class, 'getUsers']);
         Route::post('/editEvent', [\App\Http\Controllers\AdminController::class, 'editEvent']);
         // Route::post('/defineTicketPrice', [\App\Http\Controllers\AdminController::class, 'defineTicketPrice']);
-        // Route::post('/createTickets', [\App\Http\Controllers\AdminController::class, 'createTickets']);
+
 
     });
 
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/editProfile', [\App\Http\Controllers\AuthController::class, 'editProfile']);
     Route::get('/getCurrentUser', [\App\Http\Controllers\AuthController::class, 'getCurrentUser']);
 
-    Route::post('/buyTicket', [\App\Http\Controllers\TicketsController::class, 'buyTicket']);
+    Route::post('/buyTicket', [\App\Http\Controllers\EventsController::class, 'buyTicket']);
 
 
 
