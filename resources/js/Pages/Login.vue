@@ -53,10 +53,10 @@
                     </button>
 
                     <a
-                        class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                        href="#"
+                        class="inline-block align-baseline font-bold text-md text-blue-500 hover:text-blue-800"
+                        @click="gotToRegister()"
                     >
-                        Forgot Password?
+                       Register
                     </a>
                 </div>
             </form>
@@ -108,7 +108,9 @@ export default {
         return {
             formData,
             handleLogin,
-            error
+            error,
+            gotToRegister: () => {
+                router.push("/register"); }
         };
     },
 };
