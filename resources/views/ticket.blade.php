@@ -1,13 +1,13 @@
 @component('mail::message')
-# Ticket Booked Successfully
+# Ticket Booked Successfully<br>
 
-Ticket information
+Ticket information<br>
 
-Name : {{ $name}}
-Event : {{ $event->name }}
-Date : {{ $event->date }}
-PhoneNumber : {{ $phone}}
-Ticket_type: {{ $ticketType }} 
+Name : {{ $name}}<br>
+Event : {{ $event->name }}<br>
+Date : {{ $event->date }}<br>
+PhoneNumber : {{ $phone}}<br>
+Ticket_type: {{ $ticketType }} <br>
 
 
 Thanks
