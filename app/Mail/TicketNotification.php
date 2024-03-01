@@ -13,13 +13,26 @@ class TicketNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $event;
+    public $ticketType;
+    public $name;
+    public $phone;
+    public $email;
+
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($event, $ticketType, $name, $phone, $email)
     {
-        //
+        $this->event = $event;
+        $this->ticketType = $ticketType;
+        $this->name = $name;
+        $this->phone = $phone;
+        $this->email = $email;
     }
+
+
 
     /**
      * Get the message envelope.
@@ -27,7 +40,7 @@ class TicketNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Ticket Notification',
+            subject: 'Ticket for ' . $this->event->name,
         );
     }
 
@@ -37,7 +50,7 @@ class TicketNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            markdown: 'ticket',
         );
     }
 

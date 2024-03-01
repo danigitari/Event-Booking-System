@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TicketNotification;
 
 class EventsController extends Controller
 {
@@ -37,6 +39,7 @@ class EventsController extends Controller
 
     {
         $event = Event::find($request->event_id);
+     
         if ($event->tickets()->count() >= $event->max_attendees) {
             return response()->json([
                 'message' => 'Event is full',
@@ -54,6 +57,8 @@ class EventsController extends Controller
                 'email' => $request->email,
                 'user_id' => auth()->user()->id,
             ]);
+
+            Mail::to($request->email)->send(new \App\Mail\TicketNotification($event, $request->ticketType, $request->name, $request->phone, $request->email));
 
             return response()->json([
                 'message' => 'Ticket purchased successfully',
